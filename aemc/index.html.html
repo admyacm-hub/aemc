@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AEMC 2026 — Unir, Empreender, Investir e Desenvolver Calumbo</title>
+    
+    <!-- FAVICON E LOGO -->
+    <link rel="icon" type="image/png" href="https://storage.googleapis.com/generativeai-downloads/images/56e520bf-0cf8-4e38-b655-28c7cdd7a8d8.png">
+    <link rel="apple-touch-icon" href="https://storage.googleapis.com/generativeai-downloads/images/56e520bf-0cf8-4e38-b655-28c7cdd7a8d8.png">
+    
+    <!-- CONFIGURAÇÃO PWA (Progressive Web App) -->
+    <meta name="theme-color" content="#040812">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Manifesto PWA em Base64 para funcionar num único ficheiro -->
+    <link rel="manifest" href='data:application/manifest+json,{"name":"AEMC Calumbo","short_name":"AEMC","description":"Associação dos Empresários e Empreendedores do Município de Calumbo","start_url":".","display":"standalone","background_color":"%23040812","theme_color":"%23040812","icons":[{"src":"https://storage.googleapis.com/generativeai-downloads/images/56e520bf-0cf8-4e38-b655-28c7cdd7a8d8.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}'>
+    
+    <!-- Tipografia Unificada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ================= DESIGN SYSTEM 2026 ================= */
+        :root {
+            --bg-dark: #040812;
+            --navy: #0A142F;
+            --royal: #153E8A;
+            --gold: #D4AF37;
+            --gold-light: #FDE047;
+            --white: #FFFFFF;
+            --text-muted: #94A3B8;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            
+            --font-display: 'Sora', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ================= RESET & BASE ================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: var(--font-body); 
+            background-color: var(--bg-dark); 
+            color: var(--white); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .container { width: 90%; max-width: 1240px; margin: 0 auto; }
+        .section-padding { padding: 120px 0; }
+        
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+        h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .eyebrow { 
+            color: var(--gold); font-size: 0.75rem; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 0.15em; 
+            margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 12px;
+        }
+        .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+        
+        .svg-icon { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* ================= ANIMAÇÕES ================= */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        @keyframes pulseGold { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ================= BOTÕES ================= */
+        .btn { 
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 16px 32px; border-radius: 50px; font-family: var(--font-body);
+            font-weight: 600; font-size: 0.95rem; cursor: pointer; 
+            transition: var(--transition); border: 1px solid transparent;
+        }
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--gold-light), var(--gold)); 
+            color: var(--bg-dark); 
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4); }
+        .btn-secondary { 
+            background: var(--surface); color: var(--white); border-color: var(--border); backdrop-filter: blur(10px);
+        }
+        .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); }
+
+        /* ================= HEADER & LOGO ================= */
+        header { 
+            position: fixed; top: 0; width: 100%; z-index: 1000; 
+            padding: 20px 0; transition: var(--transition); border-bottom: 1px solid transparent;
+        }
+        header.scrolled { 
+            background: rgba(4, 8, 18, 0.85); backdrop-filter: blur(20px); padding: 12px 0; border-bottom: 1px solid var(--border);
+        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        
+        /* ESTILO DO LOGOTIPO COM A IMAGEM */
+        .logo { display: flex; align-items: center; gap: 14px; font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
+        .logo-img { 
+            width: 48px; height: 48px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid var(--gold); 
+            box-shadow: 0 0 15px rgba(212,175,55,0.3);
+            background: var(--navy);
+        }
+        
+        .nav-links { display: none; gap: 40px; }
+        .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--white); }
+        
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        .header-actions .btn { padding: 10px 24px; font-size: 0.85rem; display: none; animation: pulseGold 3s infinite; }
+        
+        .menu-btn { background: none; border: none; color: var(--white); cursor: pointer; display: block; padding: 8px;}
+        
+        /* Menu Mobile */
+        .mobile-menu { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
+            background: var(--bg-dark); z-index: 999; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px;
+            opacity: 0; pointer-events: none; transition: var(--transition);
+        }
+        .mobile-menu.active { opacity: 1; pointer-events: auto; }
+        .mobile-menu a { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--white); }
+        .mobile-menu a:hover { color: var(--gold); }
+        .close-btn { position: absolute; top: 24px; right: 5%; color: var(--white); background: none; border: none; cursor: pointer; }
+
+        /* ================= HERO ================= */
+        .hero { 
+            position: relative; min-height: 100vh; display: flex; align-items: center; 
+            padding-top: 80px; overflow: hidden;
+            background: radial-gradient(circle at 80% 20%, rgba(21, 62, 138, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 80px 80px; mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+            opacity: 0.3; z-index: 0;
+        }
+        
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 24px; }
+        .hero h1 span { color: var(--gold); }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 48px; max-width: 600px; font-weight: 400; }
+        .hero-btns { display: flex; flex-direction: column; gap: 16px; }
+        
+        .metrics-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 60px; position: relative; z-index: 2; }
+        .metric-card { 
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); 
+            padding: 32px; backdrop-filter: blur(10px); text-align: center;
+            transition: var(--transition); animation: float 6s ease-in-out infinite;
+        }
+        .metric-card:nth-child(2) { animation-delay: 2s; }
+        .metric-card:nth-child(3) { animation-delay: 4s; }
+        .metric-card:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-5px); }
+        .metric-value { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; color: var(--white); display: block; line-height: 1; margin-bottom: 8px;}
+        .metric-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        /* ================= PILARES ================= */
+        .pillars { padding: 80px 0; border-bottom: 1px solid var(--border); }
+        .grid-4 { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .pillar { display: flex; align-items: flex-start; gap: 20px; padding: 24px; border-radius: var(--radius); transition: var(--transition); }
+        .pillar:hover { background: var(--surface); }
+        .icon-box { 
+            width: 48px; height: 48px; border-radius: 12px; background: rgba(212, 175, 55, 0.1); 
+            display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0;
+        }
+        .pillar h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--white); }
+        .pillar p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* ================= SERVIÇOS (BENTO GRID) ================= */
+        .ecosystem { background: var(--navy); position: relative; }
+        .section-head { text-align: left; margin-bottom: 64px; max-width: 600px; }
+        .section-head h2 { color: var(--white); }
+        .section-head p { color: var(--text-muted); font-size: 1.1rem; }
+        
+        .bento-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .bento-card { 
+            background: var(--surface); border: 1px solid var(--border); 
+            border-radius: 24px; padding: 40px; position: relative; overflow: hidden; transition: var(--transition);
+        }
+        .bento-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-5px); }
+        .bento-card h3 { font-size: 1.4rem; color: var(--white); margin: 24px 0 16px; }
+        .bento-card p { color: var(--text-muted); font-size: 1rem; }
+        .bento-icon { color: var(--gold); width: 32px; height: 32px; }
+
+        /* ================= DIRETÓRIO ================= */
+        .directory { background: var(--bg-dark); }
+        .filters { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 24px; margin-bottom: 32px; scrollbar-width: none; }
+        .filter-chip { 
+            background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+            padding: 10px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 500;
+            cursor: pointer; white-space: nowrap; transition: var(--transition);
+        }
+        .filter-chip.active, .filter-chip:hover { background: var(--white); color: var(--bg-dark); border-color: var(--white); }
+        
+        .grid-directory { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .company-card { 
+            background: var(--navy); border: 1px solid var(--border); border-radius: 20px; 
+            padding: 32px; transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .company-card:hover { border-color: var(--gold); }
+        .company-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 100% 0%, rgba(212,175,55,0.1) 0%, transparent 50%);
+            opacity: 0; transition: var(--transition); pointer-events: none;
+        }
+        .company-card:hover::before { opacity: 1; }
+        .badge { 
+            position: absolute; top: 24px; right: 24px; font-size: 0.65rem; font-weight: 700; 
+            padding: 4px 12px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.05em;
+            background: rgba(212, 175, 55, 0.15); color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .company-logo { 
+            width: 64px; height: 64px; background: rgba(255,255,255,0.05); border-radius: 16px; 
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-display);
+            font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 24px; border: 1px solid var(--border);
+        }
+        .company-card h4 { font-size: 1.2rem; color: var(--white); margin-bottom: 4px; }
+        .company-card span { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* ================= AGENDA & NOTÍCIAS ================= */
+        .split-layout { display: grid; grid-template-columns: 1fr; gap: 80px; }
+        .event-item { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--border); transition: var(--transition); }
+        .event-item:hover { transform: translateX(10px); }
+        .event-date { 
+            background: var(--surface); border: 1px solid var(--border); padding: 16px; 
+            border-radius: 12px; text-align: center; min-width: 80px; height: fit-content;
+        }
+        .event-date span { display: block; font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--white); line-height: 1; }
+        .event-date small { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; display: block; margin-top: 4px;}
+        .event-info h4 { font-size: 1.1rem; color: var(--white); margin-bottom: 8px; }
+        .event-info p { font-size: 0.9rem; color: var(--text-muted); }
+        
+        .news-card { cursor: pointer; }
+        .news-img { 
+            width: 100%; height: 240px; border-radius: 20px; 
+            background: linear-gradient(135deg, var(--navy), var(--royal));
+            margin-bottom: 24px; transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .news-img::after {
+            content: ''; position: absolute; inset: 0; 
+            background: url('https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?q=80&w=1000&auto=format&fit=crop') center/cover;
+            opacity: 0.6; mix-blend-mode: overlay;
+        }
+        .news-card:hover .news-img::after { transform: scale(1.05); transition: transform 0.8s; }
+        .news-card h4 { font-size: 1.3rem; color: var(--white); transition: var(--transition); }
+        .news-card:hover h4 { color: var(--gold); }
+
+        /* ================= CTA FINAL ================= */
+        .cta-section { padding: 120px 0; text-align: center; background: var(--navy); border-top: 1px solid var(--border); }
+        .cta-section h2 { font-size: 3rem; margin-bottom: 24px; color: var(--white); }
+        .cta-btns { display: flex; flex-direction: column; gap: 16px; justify-content: center; margin-top: 40px; }
+
+        /* ================= FOOTER ================= */
+        footer { background: var(--bg-dark); padding: 80px 0 32px 0; border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 64px; }
+        .footer-col h4 { color: var(--white); font-size: 1rem; margin-bottom: 24px; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 16px; }
+        .footer-col a, .footer-col p { color: var(--text-muted); font-size: 0.95rem; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 32px; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+
+        /* ================= MEDIA QUERIES ================= */
+        @media (min-width: 768px) {
+            h2 { font-size: 3rem; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-directory { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 4rem; }
+            .hero-btns { flex-direction: row; }
+            .cta-btns { flex-direction: row; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .btn { width: auto; }
+        }
+
+        @media (min-width: 1024px) {
+            .nav-links { display: flex; }
+            .header-actions .btn { display: inline-flex; }
+            .menu-btn { display: none; }
+            .hero-content { padding-top: 60px; }
+            .hero h1 { font-size: 5rem; }
+            .grid-4 { grid-template-columns: repeat(4, 1fr); }
+            .bento-grid { grid-template-columns: repeat(3, 1fr); }
+            .bento-card:nth-child(1) { grid-column: span 2; }
+            .grid-directory { grid-template-columns: repeat(3, 1fr); }
+            .split-layout { grid-template-columns: 1fr 1fr; gap: 80px; }
+            .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENU MOBILE FULLSCREEN -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" id="closeBtn">
+            <svg class="svg-icon" style="width:32px;height:32px;" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </button>
+        <a href="#sobre">A Associação</a>
+        <a href="#associar">Associar-se</a>
+        <a href="#diretorio">Diretório</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#contacto">Contacto</a>
+    </div>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <!-- EMBLEMA OFICIAL COMO LOGO -->
+                <img src="https://storage.googleapis.com/generativeai-downloads/images/56e520bf-0cf8-4e38-b655-28c7cdd7a8d8.png" alt="Emblema AEMC" class="logo-img">
+                AEMC
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#sobre">A Associação</a>
+                <a href="#associar">Associar-se</a>
+                <a href="#diretorio">Diretório</a>
+                <a href="#eventos">Eventos</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#associar" class="btn btn-primary">Tornar-se Associado</a>
+                <button class="menu-btn" id="menuBtn">
+                    <svg class="svg-icon" style="width:28px;height:28px;" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content reveal">
+                <span class="eyebrow">Calumbo, Angola · 2026</span>
+                <h1>Unir, Empreender,<br>Investir e <span>Desenvolver</span> Calumbo.</h1>
+                <p>A principal referência de articulação empresarial do município. Conectamos empresas, investidores e o poder local para transformar a economia da nossa região.</p>
+                <div class="hero-btns">
+                    <a href="#associar" class="btn btn-primary">
+                        Associar-se à AEMC
+                        <svg class="svg-icon" style="width:18px;height:18px;" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                    </a>
+                    <a href="#diretorio" class="btn btn-secondary">Explorar Diretório</a>
+                </div>
+            </div>
+            
+            <div class="metrics-grid reveal">
+                <div class="metric-card">
+                    <span class="metric-value counter" data-target="200">+0</span>
+                    <span class="metric-label">Empresas Associadas</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value counter" data-target="12">0</span>
+                    <span class="metric-label">Setores Representados</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value counter" data-target="15">+0%</span>
+                    <span class="metric-label">Crescimento Anual</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PILARES -->
+    <section class="pillars">
+        <div class="container">
+            <div class="grid-4 reveal">
+                <div class="pillar">
+                    <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                    <div>
+                        <h3>União</h3>
+                        <p>Uma voz representativa e forte junto das autoridades.</p>
+                    </div>
+                </div>
+                <div class="pillar">
+                    <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div>
+                    <div>
+                        <h3>Empreender</h3>
+                        <p>Mentoria e capacitação para acelerar o seu negócio.</p>
+                    </div>
+                </div>
+                <div class="pillar">
+                    <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"></path><path d="M17 6h6v6"></path></svg></div>
+                    <div>
+                        <h3>Investir</h3>
+                        <p>Conexões diretas com investidores e oportunidades.</p>
+                    </div>
+                </div>
+                <div class="pillar">
+                    <div class="icon-box"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M9 8h1"></path><path d="M9 12h1"></path><path d="M9 16h1"></path><path d="M14 8h1"></path><path d="M14 12h1"></path><path d="M14 16h1"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path></svg></div>
+                    <div>
+                        <h3>Desenvolver</h3>
+                        <p>Impacto real na infraestrutura e economia de Calumbo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ECOSSISTEMA (BENTO) -->
+    <section class="ecosystem section-padding">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">Serviços Premium</span>
+                <h2>Um ecossistema desenhado para o seu crescimento.</h2>
+                <p>Apoiamos o ciclo completo do seu negócio, desde a legalização até à expansão de mercado.</p>
+            </div>
+            
+            <div class="bento-grid">
+                <div class="bento-card reveal">
+                    <svg class="bento-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    <h3>Apoio Empresarial</h3>
+                    <p>Consultoria estratégica, assessoria jurídica e apoio contabilístico para solidificar as bases da sua empresa.</p>
+                </div>
+                <div class="bento-card reveal">
+                    <svg class="bento-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                    <h3>Formação Executiva</h3>
+                    <p>Programas de capacitação focados na gestão moderna e nas necessidades reais do mercado angolano.</p>
+                </div>
+                <div class="bento-card reveal">
+                    <svg class="bento-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    <h3>Networking B2B</h3>
+                    <p>Eventos exclusivos e rodadas de negócios desenhados para conectar os principais players do município.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIRETÓRIO -->
+    <section id="diretorio" class="directory section-padding">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">Diretório Oficial</span>
+                <h2>Empresas que constroem Calumbo.</h2>
+            </div>
+            
+            <div class="filters reveal">
+                <div class="filter-chip active">Todos</div>
+                <div class="filter-chip">Comércio</div>
+                <div class="filter-chip">Indústria</div>
+                <div class="filter-chip">Serviços</div>
+                <div class="filter-chip">Logística</div>
+            </div>
+
+            <div class="grid-directory">
+                <div class="company-card reveal">
+                    <span class="badge">Verificado</span>
+                    <div class="company-logo">CL</div>
+                    <h4>Calumbo Logística</h4>
+                    <span>Transporte & Distribuição</span>
+                </div>
+                <div class="company-card reveal">
+                    <span class="badge">Verificado</span>
+                    <div class="company-logo">CS</div>
+                    <h4>Comércio Silva</h4>
+                    <span>Retalho Alimentar</span>
+                </div>
+                <div class="company-card reveal">
+                    <span class="badge">Parceiro</span>
+                    <div class="company-logo">AI</div>
+                    <h4>Angola Indústria</h4>
+                    <span>Transformação e Fabrico</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGENDA & NOTÍCIAS -->
+    <section id="eventos" class="section-padding" style="background: var(--navy);">
+        <div class="container split-layout">
+            <div class="reveal">
+                <span class="eyebrow">Calendário 2026</span>
+                <h2 style="margin-bottom: 48px; color: var(--white);">Próximos Eventos</h2>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <span>15</span>
+                        <small>Nov</small>
+                    </div>
+                    <div class="event-info">
+                        <h4>Workshop: Gestão Financeira para PMEs</h4>
+                        <p>Sede da AEMC, Calumbo · 14:00 - 17:00</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <span>28</span>
+                        <small>Nov</small>
+                    </div>
+                    <div class="event-info">
+                        <h4>Feira de Negócios de Calumbo</h4>
+                        <p>Praça Central · 09:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal">
+                <span class="eyebrow">Comunicados</span>
+                <h2 style="margin-bottom: 48px; color: var(--white);">Últimas Notícias</h2>
+                
+                <div class="news-card">
+                    <div class="news-img"></div>
+                    <h4>Novas diretrizes para o comércio debatidas em assembleia geral.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="associar" class="cta-section">
+        <div class="container reveal">
+            <h2>Pronto para elevar o seu negócio?</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Junte-se à elite empresarial de Calumbo. Adesão simples, processos ágeis e benefícios imediatos.</p>
+            <div class="cta-btns">
+                <a href="#" class="btn btn-primary">Iniciar Adesão Online</a>
+                <a href="#" class="btn btn-secondary">Falar com a Direção</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 24px;">
+                        <img src="https://storage.googleapis.com/generativeai-downloads/images/56e520bf-0cf8-4e38-b655-28c7cdd7a8d8.png" alt="AEMC" class="logo-img" style="width:40px; height:40px;">
+                        AEMC
+                    </a>
+                    <p>Unir, Empreender, Investir e Desenvolver Calumbo. A força do empresariado local em 2026.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Institucional</h4>
+                    <ul>
+                        <li><a href="#sobre">Quem Somos</a></li>
+                        <li><a href="#diretorio">Diretório</a></li>
+                        <li><a href="#eventos">Eventos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contactos</h4>
+                    <ul>
+                        <li><p>Calumbo, Luanda - Angola</p></li>
+                        <li><a href="mailto:geral@aemc.co.ao">geral@aemc.co.ao</a></li>
+                        <li><a href="tel:+244900000000">+244 900 000 000</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Redes</h4>
+                    <ul>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 AEMC — Associação dos Empresários e Empreendedores do Município de Calumbo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT 2026 (PWA & Animações) -->
+    <script>
+        // ================= PWA (SERVICE WORKER) =================
+        // Cria e regista um Service Worker virtual via Blob para ativar a instalação PWA
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                self.addEventListener('install', (e) => {
+                    e.waitUntil(caches.open('aemc-v1').then((cache) => cache.addAll(['/'])));
+                });
+                self.addEventListener('fetch', (e) => {
+                    e.respondWith(caches.match(e.request).then((response) => response || fetch(e.request)));
+                });
+            `;
+            const blob = new Blob([swCode], {type: 'application/javascript'});
+            const swUrl = URL.createObjectURL(blob);
+            navigator.serviceWorker.register(swUrl).catch(err => console.log('SW erro:', err));
+        }
+
+        // ================= INTERAÇÕES UI =================
+        // 1. Menu Mobile
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+
+        // 2. Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // 3. Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 4. Animated Counters
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const updateCount = () => {
+                        const count = +counter.innerText.replace(/[^0-9]/g, '');
+                        const inc = target / 40;
+                        if (count < target) {
+                            let newText = Math.ceil(count + inc);
+                            if(counter.innerText.includes('+')) newText = '+' + newText;
+                            if(counter.innerText.includes('%')) newText = newText + '%';
+                            counter.innerText = newText;
+                            setTimeout(updateCount, 30);
+                        } else {
+                            let finalText = target;
+                            if(counter.innerText.includes('+')) finalText = '+' + finalText;
+                            if(counter.innerText.includes('%')) finalText = finalText + '%';
+                            counter.innerText = finalText;
+                        }
+                    };
+                    updateCount();
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(counter => counterObserver.observe(counter));
+    </script>
+</body>
+</html>
